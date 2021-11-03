@@ -7,7 +7,7 @@ import "./user.css";
 function User() {
     const [data, setData] = useState("");
     const Token = React.useContext(TokenApi)
-
+    
     let toke = Token.token;
     const headers = {
         Authorization: `Bearer ${toke}`,
@@ -16,7 +16,7 @@ function User() {
     const getdata = async () => {
         let res = await axios
         // .get("http://127.0.0.1:8000/", { headers })
-        .get("https://fastapi-app-diabetes.herokuapp.com/x", { headers })
+        .get("http://127.0.0.1:8000/", { headers })
             .then((response) => {
             return response.data;
         });

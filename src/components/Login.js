@@ -6,15 +6,17 @@ import { TextField } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import { useHistory } from "react-router-dom";
 import Headerbar from "./Header";
+import Alert from '@mui/material/Alert';
 // const AuthApi = React.createContext();
 //const TokenApi = React.createContext();
-
 
 const Login = () => {
     const history = useHistory();
     // const Auth = React.useContext(AuthApi);
     const [username, setName] = useState("");
     const [password, setPassword] = useState("");
+    const [errorAlert, setErrorArlert] = useState(false)
+    const [errorContent, setErrorContent] = useState('');
 
     const handleMenuClick = (pageURL) => {
       history.push(pageURL)
@@ -36,7 +38,11 @@ const Login = () => {
             Cookies.set("token", response.data.access_token);
             return response;
           })
-          .catch(err => console.log(err.response.data))
+          .catch((error) => {
+            console.log("error", error.response.data['detail'])
+            setErrorContent(error.response.data['detail'])
+            setErrorArlert(true);
+        });
         return res;
       };
 
@@ -84,7 +90,8 @@ const Login = () => {
                           }}>
                <LockIcon />            
                 <TextField
-                  Label='Password'
+                    Label='Password'
+                    type='password'
                   className='textfield'
                   style={{
                       marginLeft: '8px',
@@ -96,13 +103,23 @@ const Login = () => {
               </div>
               </div>
           <div style={{ textAlign: "center" }}>
-            <input   className='button-secondary' type="submit" value="Login" />
+                <input className='button-secondary' type="submit" value="Login" />
+              {errorAlert ?
+              (
+                <>
+                  <Alert severity='error' style={{paddingTop: 10}}>{errorContent}</Alert>
+                </>
+              )
+              : <></>}
           </div>
             </form>
-            <div style={{ textAlign: "center" }}>
-              <input className='button-secondary' type="submit" value="Register" onClick={() => handleMenuClick('/register')}   />
           </div>
+          <div className='home-card'>
+            <div style={{ textAlign: "center" }}>
+              <p>Don't Have an account yet?</p>
+              <input className='button-secondary' type="submit" value="Register" onClick={() => handleMenuClick('/register')}   />
             </div>
+          </div>
           </div>
       </div>
     );

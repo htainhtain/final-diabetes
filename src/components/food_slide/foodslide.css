@@ -11,8 +11,8 @@
   }
   
   .foodimage{
-    width: 500px;
-    /* max-width: 50%; */
+    /* width: 500px; */
+    max-width: 50%;
     height: auto;
     /* height: auto; */
     margin-left: auto;

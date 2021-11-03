@@ -18,8 +18,8 @@ const SlideShow = () => {
     if (!Array.isArray(SlideShowData) || SlideShowData.length <= 0) {
         return null;
     }
+    console.log("inside slideshow")
     return (
-
         <section className="slider">
             <FaArrowAltCircleLeft className='left-arrow' onClick={prevSlide}/>
             <FaArrowAltCircleRight className='right-arrow' onClick={nextSlide}/>

@@ -9,7 +9,6 @@ import {
 import Home from './components/Home'
 import Cookies from "js-cookie";
 import ProtectedLogin from "./components/ProtectedLogin";
-import ProtectedRoute2 from "./components/ProtectedRoute2";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -19,13 +18,24 @@ import Exercise from "./components/Exercise";
 import User from "./components/User";
 import BloodSugar  from "./components/BloodSugar";
 import Heroku from "./components/heroku";
+import Uploadfood from "./components/Uploadfood";
+import MyExercise from "./components/MyExercise";
+import FormValidate from "./components/formValidate";
+import About from "./components/About";
+import Stress from "./components/Stress";
 
 export const AuthApi = React.createContext();
 export const TokenApi = React.createContext();
 
 function App() {
-  const [auth, setAuth] = useState(false);
-  const [token, setToken] = useState("");
+  let init_auth = false;
+  let init_token = Cookies.get("token");
+  if (init_token) {
+    init_auth = true;
+  }
+
+  const [auth, setAuth] = useState(init_auth);
+  const [token, setToken] = useState(init_token);
 
   const readCookie = () => {
     let token = Cookies.get("token");
@@ -34,9 +44,12 @@ function App() {
       setToken(token);
     }
   };
+  
   React.useEffect(() => {
     readCookie();
+    console.log("App - readcookie")
   }, []);
+  console.log("App - program")
 
   return (
     <>
@@ -53,10 +66,10 @@ function App() {
   );
 }
 
-
 const Routes = () => {
   const Auth = React.useContext(AuthApi);
   return (
+    <div>
     <Switch>
       <Route exact path="/">
         <Home />
@@ -73,8 +86,17 @@ const Routes = () => {
       <Route exact path="/exercise">
         <Exercise />
       </Route>
+      <Route exact path="/stress">
+        <Stress />
+      </Route>
       <Route exact path="/heroku">
         <Heroku />
+      </Route>
+      <Route exact path="/formValidate">
+        <FormValidate />
+      </Route>
+      <Route exact path="/about">
+        <About />
       </Route>
       <ProtectedRoute
         exact path="/user"
@@ -85,13 +107,27 @@ const Routes = () => {
         exact path="/bloodsugar"
         auth={Auth.auth}
         component={BloodSugar}
-      ></ProtectedRoute>
+        ></ProtectedRoute>
+      <ProtectedRoute
+          exact path="/Uploadfood"
+          auth={Auth.auth}
+          component={Uploadfood}
+      >
+      </ProtectedRoute> 
+      <ProtectedRoute
+          exact path="/myexercise"
+          auth={Auth.auth}
+          component={MyExercise}
+      >
+      </ProtectedRoute>
+
       <ProtectedLogin
         exact path="/login"    
         auth={Auth.auth}  
         component={Login}
       ></ProtectedLogin>
-    </Switch>
+      </Switch>
+      </div>
   );
 };
 

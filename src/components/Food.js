@@ -1,12 +1,19 @@
 import "././Main.css";
-import Headerbar from "./Header";
-import FoodPage from "./food_slide/FoodPage";
+// import FoodPage from "./food_slide/FoodPage";
+import ProtectedHeaderBar from "./ProtectedHeaderBar";
+import { AuthApi } from '../App.js';
+import React, { useContext } from 'react';
+import FoodPage2 from "./FoodPage2";
 
 function Food() {
+  const Auth = useContext(AuthApi)
   return (
     <div>
-        <Headerbar />
-        <FoodPage />
+        <ProtectedHeaderBar
+          auth={Auth.auth}
+        >  
+        </ProtectedHeaderBar>
+        <FoodPage2 />
       </div>
 
   );

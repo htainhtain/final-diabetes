@@ -38,8 +38,9 @@
     font-size: 28px;
     font-weight: 600;
     color: var(--cu-grey);
-    margin-top: 10px;
-    margin-bottom: 10px;
+    /* margin-top: 10px; */
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   .space-text {
@@ -141,30 +142,7 @@
     background-size: cover;
   }
 
-  .centered {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    font-weight: 1000;
-    /* display: flex; */
-  }
 
-  .centered2 {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    font-weight: 1000;
-    /* display: flex; */
-  }
-  
-  .para {
-    left:'20px';
-    margin-right:'20px';
-    text-align:'justify';
+  .rootbar{
+    justify-content: center;
   }

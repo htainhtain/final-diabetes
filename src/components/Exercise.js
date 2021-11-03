@@ -1,16 +1,20 @@
 import "././Main.css";
-import Headerbar from "./Header";
+import ProtectedHeaderBar from "./ProtectedHeaderBar";
+import { AuthApi } from '../App.js';
+import React, { useContext } from 'react';
 import ExercisePage from "./ExercisePage";
 import ResponsivePlayer from "./video/ResponsivePlayer";
 
 function Exercise() {
+  const Auth = useContext(AuthApi)
   return (
     <div className='background'>
-      <Headerbar />
+        <ProtectedHeaderBar
+          auth={Auth.auth}
+        >  
+        </ProtectedHeaderBar>
       <ExercisePage />
-      <ResponsivePlayer />
     </div>
   );
 }
-
 export default Exercise;

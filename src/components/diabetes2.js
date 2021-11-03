@@ -1,17 +1,20 @@
 import "././Main.css";
 import SlideShow from './slide/SlideShow';
-import Headerbar from "./Header";
+import ProtectedHeaderBar from "./ProtectedHeaderBar";
+import { AuthApi } from '../App.js';
+import React, { useContext } from 'react';
+import Diabetes2page from "./diabetes2page";
 
 function Diabetes2() {
+  const Auth = useContext(AuthApi)
   return (
- 
     <div>
-        <Headerbar />
-        <SlideShow />
+        <ProtectedHeaderBar
+          auth={Auth.auth}
+        >  
+        </ProtectedHeaderBar>
+        <Diabetes2page />
       </div>
-
   );
 }
-
-
 export default Diabetes2;

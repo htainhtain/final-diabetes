@@ -1,13 +1,19 @@
 import "././Main.css";
 import FrontPage from './frontpage';
-import Headerbar from "./Header";
+import ProtectedHeaderBar from "./ProtectedHeaderBar";
+import { AuthApi } from '../App.js';
+import React, { useContext } from 'react';
 
 
 function Home() {
-
+  const Auth = useContext(AuthApi)
   return (
-      <div>
-        <Headerbar />
+    <div>
+        <ProtectedHeaderBar
+          auth={Auth.auth}
+        >  
+        </ProtectedHeaderBar>
+        {/* <Headerbar /> */}
         <FrontPage />
       </div>
   );
