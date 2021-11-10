@@ -1,5 +1,4 @@
 import "././Main.css";
-import SlideShow from './slide/SlideShow';
 import ProtectedHeaderBar from "./ProtectedHeaderBar";
 import { AuthApi } from '../App.js';
 import React, { useContext } from 'react';

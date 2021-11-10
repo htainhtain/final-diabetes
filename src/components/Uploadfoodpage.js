@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { app } from './base'
 import Headerbarauth from './Headerauth';
 import "./Main.css";
-import NativeSelect from "@material-ui/core/NativeSelect";
 import { Button } from "@material-ui/core";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import ListSubheader from '@mui/material/ListSubheader';
 import { TokenApi } from '../App.js';
 import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 import Alert from '@mui/material/Alert';
 
 const db = app.firestore();
@@ -115,21 +112,21 @@ function Uploadfoodpage() {
                         <form onSubmit={onSubmit} style= {{ display: 'flex', flexDirection: 'column'}}>
                             <FormControl required sx={{ m: 1, minWidth: 120, paddingBottom: 1 }}>
                                 <InputLabel id="demo-simple-select-helper-label">Meal Type</InputLabel>
-                            <Select
-                                required
-                                labelId="demo-simple-select-helper-label"
-                                id="demo-simple-select-helper"
-                                value={mealType}
-                                label="Meal Type"
-                                onChange={(e) => setMealType(e.target.value)}
-                                >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={'Breakfast'}>Breakfast</MenuItem>
-                                <MenuItem value={'Lunch'}>Lunch</MenuItem>
-                                <MenuItem value={'Dinner'}>Dinner</MenuItem>
-                                <MenuItem value={'Other'}>Other</MenuItem>
+                                <Select
+                                    required
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={mealType}
+                                    label="Meal Type"
+                                    onChange={(e) => setMealType(e.target.value)}
+                                    >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={'Breakfast'}>Breakfast</MenuItem>
+                                    <MenuItem value={'Lunch'}>Lunch</MenuItem>
+                                    <MenuItem value={'Dinner'}>Dinner</MenuItem>
+                                    <MenuItem value={'Other'}>Other</MenuItem>
                                 </Select>
                             </FormControl>
                             <div style= {{ display: 'flex', justifyContent: 'space-evenly'}}>
@@ -160,7 +157,7 @@ function Uploadfoodpage() {
                                 style={{backgroundColor: '#DE5C8E', color: 'white'}}
                             >
                                     Submit
-                        </Button>
+                            </Button>
                         {successAlert ?
                             (
                                 <>

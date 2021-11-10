@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from "react-router-dom";
 import Home from './components/Home'
 import Cookies from "js-cookie";
@@ -17,12 +15,11 @@ import Food from "./components/Food";
 import Exercise from "./components/Exercise";
 import User from "./components/User";
 import BloodSugar  from "./components/BloodSugar";
-import Heroku from "./components/heroku";
 import Uploadfood from "./components/Uploadfood";
 import MyExercise from "./components/MyExercise";
-import FormValidate from "./components/formValidate";
 import About from "./components/About";
 import Stress from "./components/Stress";
+import MyExercise2 from "./components/MyExercise2";
 
 export const AuthApi = React.createContext();
 export const TokenApi = React.createContext();
@@ -71,146 +68,64 @@ const Routes = () => {
   return (
     <div>
     <Switch>
-      <Route exact path="/">
-        <Home />
-      </Route>
-      <Route exact path="/diabetes2">
-        <Diabetes2 />
-      </Route>
-      <Route exact path="/food">
-        <Food />
-      </Route>
-      <Route exact path="/register">
-        <Register />
-      </Route>
-      <Route exact path="/exercise">
-        <Exercise />
-      </Route>
-      <Route exact path="/stress">
-        <Stress />
-      </Route>
-      <Route exact path="/heroku">
-        <Heroku />
-      </Route>
-      <Route exact path="/formValidate">
-        <FormValidate />
-      </Route>
-      <Route exact path="/about">
-        <About />
-      </Route>
-      <ProtectedRoute
-        exact path="/user"
-        auth={Auth.auth}
-        component={User}
-      ></ProtectedRoute>
-      <ProtectedRoute
-        exact path="/bloodsugar"
-        auth={Auth.auth}
-        component={BloodSugar}
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/diabetes2">
+          <Diabetes2 />
+        </Route>
+        <Route exact path="/food">
+          <Food />
+        </Route>
+        <Route exact path="/register">
+          <Register />
+        </Route>
+        <Route exact path="/exercise">
+          <Exercise />
+        </Route>
+        <Route exact path="/stress">
+          <Stress />
+        </Route>
+        <Route exact path="/about">
+          <About />
+        </Route>
+        <ProtectedRoute
+          exact path="/user"
+          auth={Auth.auth}
+          component={User}
         ></ProtectedRoute>
-      <ProtectedRoute
-          exact path="/Uploadfood"
+        <ProtectedRoute
+          exact path="/bloodsugar"
           auth={Auth.auth}
-          component={Uploadfood}
-      >
-      </ProtectedRoute> 
-      <ProtectedRoute
-          exact path="/myexercise"
-          auth={Auth.auth}
-          component={MyExercise}
-      >
-      </ProtectedRoute>
+          component={BloodSugar}
+          ></ProtectedRoute>
+        <ProtectedRoute
+            exact path="/Uploadfood"
+            auth={Auth.auth}
+            component={Uploadfood}
+        >
+        </ProtectedRoute> 
+        <ProtectedRoute
+            exact path="/myexercise"
+            auth={Auth.auth}
+            component={MyExercise}
+        >
+        </ProtectedRoute>
+        <ProtectedRoute
+            exact path="/myexercise2"
+            auth={Auth.auth}
+            component={MyExercise2}
+        >
+        </ProtectedRoute>
+        <ProtectedLogin
+          exact path="/login"    
+          auth={Auth.auth}  
+          component={Login}
+        ></ProtectedLogin>
 
-      <ProtectedLogin
-        exact path="/login"    
-        auth={Auth.auth}  
-        component={Login}
-      ></ProtectedLogin>
-      </Switch>
-      </div>
+    </Switch>
+  </div>
   );
 };
-
-// const Home = () => {
-//   const [data, setData] = useState("");
-//   const Auth = React.useContext(AuthApi);
-//   const Token = React.useContext(TokenApi);
-//   const handleonclick = () => {
-//     Auth.setAuth(false);
-//     Cookies.remove("token");
-//   };
-//   let toke = Token.token;
-//   const headers = {
-//     Authorization: `Bearer ${toke}`,
-//   };
-//   const getdata = async () => {
-//     let res = await axios
-//       .get("http://127.0.0.1:8000/", { headers })
-//       .then((response) => {
-//         return response.data.data;
-//       });
-//     return res;
-//   };
-
-//   React.useEffect(async () => {
-//     let x = await getdata();
-//     setData(x);
-//     console.log(x);
-//   }, []);
-//   return (
-//     <>
-//       <h2>Home</h2>
-//       <button onClick={handleonclick}>Logout</button>
-//       <h1>{data}</h1>
-//     </>
-//   );
-// };
-
-// function User() {
-//   const [data, setData] = useState("");
-//   const Auth = React.useContext(AuthApi);
-//   console.log("TokenApi: ", TokenApi)
-//   const Token = React.useContext(TokenApi);
-
-//   const handleonclick = () => {
-//       Auth.setAuth(false);
-//       Cookies.remove("token");
-//   };
-//   console.log("token data", Token)
-//   let toke = Token.token;
-//   const headers = {
-//       Authorization: `Bearer ${toke}`,
-//   };
-//   const getdata = async () => {
-//       let res = await axios
-//       .get("http://127.0.0.1:8000/", { headers })
-//       .then((response) => {
-//           return response.data.data;
-//       });
-//       return res;
-//   };
-
-//   React.useEffect(async () => {
-//       let x = await getdata();
-//       setData(x);
-//       console.log(x);
-//   }, []);
-
-//   return (
-//       <div>
-//           <IconButton
-//               size="large"
-//               color="inherit"
-//               // style={{marginRight: '40px'}}
-//               // onClick={() => handleMenuClick('/register')}
-//               onClick={handleonclick}
-//           >
-//                       <Typography variant="h6"> Sign Up </Typography>
-//           </IconButton>      
-//           <h1>This is User page</h1>
-//       </div>
-//   )
-// }
-
 
 export default App;

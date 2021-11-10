@@ -1,17 +1,7 @@
 import "./frontpage.css";
 import "./Main.css"
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import BackgroundSlider from 'react-background-slider'
-
-const Slide = styled.div`
-  height: 100%;
-  width: 100vw;
-  flex-shrink: 0;
-  background-position: center;
-  background-size: cover;
-  transition: 750ms all ease-in-out;
-`;
 
 const images = [
   '/frontpageimage/health_home.jpg',

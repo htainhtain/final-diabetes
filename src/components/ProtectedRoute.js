@@ -3,7 +3,6 @@ import {
     Redirect,
     Route,
 } from "react-router-dom";
-import { AuthApi } from '../App';
 
 const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
   console.log("Here in Protected route")

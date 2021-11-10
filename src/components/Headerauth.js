@@ -10,7 +10,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useHistory } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { AuthApi, TokenApi } from '../App.js';
+import { AuthApi } from '../App.js';
 import Cookies from 'js-cookie';
 
 const useStyles = makeStyles(theme => ({

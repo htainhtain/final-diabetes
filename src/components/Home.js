@@ -13,7 +13,6 @@ function Home() {
           auth={Auth.auth}
         >  
         </ProtectedHeaderBar>
-        {/* <Headerbar /> */}
         <FrontPage />
       </div>
   );

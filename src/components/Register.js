@@ -57,7 +57,7 @@ function Register() {
   
     const {
       register,
-      control,
+      // control,
       handleSubmit,
       formState: { errors }
     } = useForm({

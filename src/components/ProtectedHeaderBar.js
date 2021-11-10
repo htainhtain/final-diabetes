@@ -1,7 +1,6 @@
 import React from 'react'
 import {
-    Redirect,
-    Route,
+    Route
   } from "react-router-dom";
 import Headerbar from "./Header";
 import Headerbarauth from "./Headerauth"
