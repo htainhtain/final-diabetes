@@ -15,7 +15,7 @@ function User() {
     // https://fastapi-app-diabetes.herokuapp.com/login
     const getdata = async () => {
         let res = await axios
-        .get("http://127.0.0.1:8000/", { headers })
+        .get("https://diabetes-backend-wices.herokuapp.com/", { headers })
             .then((response) => {
             return response.data;
         });

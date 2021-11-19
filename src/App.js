@@ -108,7 +108,7 @@ const Routes = () => {
         <ProtectedRoute
             exact path="/myexercise"
             auth={Auth.auth}
-            component={MyExercise}
+            component={MyExercise2}
         >
         </ProtectedRoute>
         <ProtectedRoute

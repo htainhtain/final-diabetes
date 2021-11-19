@@ -67,7 +67,8 @@ function Register() {
   const onSubmit = (data, evt) => {
       evt.preventDefault();
       // console.log(JSON.stringify(data, null, 2));
-      axios.post("http://127.0.0.1:8000/register", data)
+      // https://diabetes-backend-wices.herokuapp.com/
+      axios.post("https://diabetes-backend-wices.herokuapp.com/register", data)
         .then((response) => {
             console.log("response", response.status)
             setAlertContent("Your registration was successfully completed.");

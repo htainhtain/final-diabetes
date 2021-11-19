@@ -33,7 +33,8 @@ const Login = () => {
       // https://fastapi-app-diabetes.herokuapp.com
       const news = async () => {
         // let res = await axios.post("http://127.0.0.1:8000/login", data)
-        let res = await axios.post("https://fastapi-app-diabetes.herokuapp.com/login", data)
+        // https://diabetes-backend-wices.herokuapp.com/
+        let res = await axios.post("https://diabetes-backend-wices.herokuapp.com/login", data)
           .then((response) => {
             Cookies.set("token", response.data.access_token);
             return response;

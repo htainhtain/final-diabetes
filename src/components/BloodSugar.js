@@ -37,7 +37,7 @@ function BloodSugar() {
 
     const getdata = async () => {
         let res = await axios
-        .get("http://127.0.0.1:8000/", { headers })
+        .get("https://diabetes-backend-wices.herokuapp.com/", { headers })
             .then((response) => {
             return response.data;
         });
@@ -60,7 +60,7 @@ function BloodSugar() {
             "date": date,
             "bloodsugar": bloodsugar
         };
-        axios.post(`http://127.0.0.1:8000/api/create_bloodsugar/${data.username}`, bloodsugar_data)
+        axios.post(`https://diabetes-backend-wices.herokuapp.com/api/create_bloodsugar/${data.username}`, bloodsugar_data)
         .then((response) => {
           console.log(response);
           setAlertContent("Blood Sugar has been put.");
@@ -78,7 +78,7 @@ function BloodSugar() {
 
     useEffect(() => {
         async function fetchblooddata() {
-            const result = await axios.get(`http://localhost:8000/api/get_bloodsugar/${data.username}`);
+            const result = await axios.get(`https://diabetes-backend-wices.herokuapp.com/api/get_bloodsugar/${data.username}`);
             setbloodsugardata(result.data)
             console.log(bloodsugardata)
         }
