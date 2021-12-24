@@ -13,6 +13,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Alert from '@mui/material/Alert';
+import { useTranslation } from 'react-i18next';
 
 const db = app.firestore();
 
@@ -25,6 +26,7 @@ function Uploadfoodpage() {
     const [alertContent, setAlertContent] = useState('');
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
+    const { t } = useTranslation();
 
     // for username & auth 
     const [userdata, setUserData] = useState("");
@@ -108,10 +110,10 @@ function Uploadfoodpage() {
             <Headerbarauth />
             <div className="container home-block">
                 <div className="home-card">
-                    <div className="text-title">Upload Food</div>
+                    <div className="text-title">{t('UploadFood.1')}</div>
                         <form onSubmit={onSubmit} style= {{ display: 'flex', flexDirection: 'column'}}>
                             <FormControl required sx={{ m: 1, minWidth: 120, paddingBottom: 1 }}>
-                                <InputLabel id="demo-simple-select-helper-label">Meal Type</InputLabel>
+                                <InputLabel id="demo-simple-select-helper-label">{t('MealType.1')}</InputLabel>
                                 <Select
                                     required
                                     labelId="demo-simple-select-helper-label"
@@ -121,12 +123,12 @@ function Uploadfoodpage() {
                                     onChange={(e) => setMealType(e.target.value)}
                                     >
                                     <MenuItem value="">
-                                        <em>None</em>
+                                        <em>{t('None.1')}</em>
                                     </MenuItem>
-                                    <MenuItem value={'Breakfast'}>Breakfast</MenuItem>
-                                    <MenuItem value={'Lunch'}>Lunch</MenuItem>
-                                    <MenuItem value={'Dinner'}>Dinner</MenuItem>
-                                    <MenuItem value={'Other'}>Other</MenuItem>
+                                    <MenuItem value={'Breakfast'}>{t('Breakfast.1')}</MenuItem>
+                                    <MenuItem value={'Lunch'}>{t('Lunch.1')}</MenuItem>
+                                    <MenuItem value={'Dinner'}>{t('Dinner.1')}</MenuItem>
+                                    <MenuItem value={'Other'}>{t('Other.1')}</MenuItem>
                                 </Select>
                             </FormControl>
                             <div style= {{ display: 'flex', justifyContent: 'space-evenly'}}>
@@ -143,10 +145,10 @@ function Uploadfoodpage() {
                                         component="span"
                                         style={{backgroundColor: '#DE5C8E', color: 'white'}}
                                     >
-                                        Choose Picture
+                                        {t('ChoosePicture.1')}
                                     </Button>
                                 </label>
-                                <input type="text" name="username" placeholder="NAME" required/>
+                                <input type="text" name="username" placeholder={t('Name.1')} required/>
                             </div>
                             <br />
                             <Button
@@ -156,7 +158,7 @@ function Uploadfoodpage() {
                                 type="submit"
                                 style={{backgroundColor: '#DE5C8E', color: 'white'}}
                             >
-                                    Submit
+                                    {t('Submit.1')}
                             </Button>
                         {successAlert ?
                             (
@@ -176,7 +178,7 @@ function Uploadfoodpage() {
                 </div>
                 <div className="home-card">
                                         
-                    <div className="text-title">Your Daily Diet Album</div>
+                    <div className="text-title">{t('Album.1')}</div>
                     <Button
                         className='button'
                         value='Submit'
@@ -186,7 +188,7 @@ function Uploadfoodpage() {
                         onClick={reRender}
                         style={{backgroundColor: '#DE5C8E', color: 'white'}}
                     >
-                        Show/Update Album
+                        {t('ShowUpdateAlbum.1')}
                     </Button>
 
                     <ImageList sx={{ maxwidth: 500, height: 450 }}>

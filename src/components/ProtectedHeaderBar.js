@@ -5,7 +5,9 @@ import {
 import Headerbar from "./Header";
 import Headerbarauth from "./Headerauth"
 
+
 const ProtectedHeaderBar = ({ auth }) => {
+
     return (
       <Route
         // {...rest}

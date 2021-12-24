@@ -16,13 +16,15 @@ import Exercise from "./components/Exercise";
 import User from "./components/User";
 import BloodSugar  from "./components/BloodSugar";
 import Uploadfood from "./components/Uploadfood";
-import MyExercise from "./components/MyExercise";
+// import MyExercise from "./components/MyExercise";
 import About from "./components/About";
 import Stress from "./components/Stress";
 import MyExercise2 from "./components/MyExercise2";
+import Test from "./components/Test";
 
 export const AuthApi = React.createContext();
 export const TokenApi = React.createContext();
+export const LanguageApi = React.createContext();
 
 function App() {
   let init_auth = false;
@@ -30,9 +32,11 @@ function App() {
   if (init_token) {
     init_auth = true;
   }
+  let init_lang = 'th';
 
   const [auth, setAuth] = useState(init_auth);
   const [token, setToken] = useState(init_token);
+  const [lang, setLang] = useState(init_lang);
 
   const readCookie = () => {
     let token = Cookies.get("token");
@@ -52,11 +56,13 @@ function App() {
     <>
       <AuthApi.Provider value={{ auth, setAuth }}>
         <TokenApi.Provider value={{ token, setToken }}>
-          <Router>
-            <div>
-              <Routes />
-            </div>
-          </Router>
+          <LanguageApi.Provider value={{ lang, setLang }}>
+            <Router>
+              <div>
+                <Routes />
+              </div>
+            </Router>
+          </LanguageApi.Provider>
         </TokenApi.Provider>
       </AuthApi.Provider>
     </>
@@ -70,6 +76,9 @@ const Routes = () => {
     <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/test">
+          <Test />
         </Route>
         <Route exact path="/diabetes2">
           <Diabetes2 />

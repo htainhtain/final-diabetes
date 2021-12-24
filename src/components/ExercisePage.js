@@ -1,20 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ResponsivePlayer from "./video/ResponsivePlayer";
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import './heroku.css'
+import { useTranslation } from 'react-i18next';
 
 function ExercisePage() {
+    const { t } = useTranslation();
+
     return (
         <>
             <div className="background">
                 <div className="container home-block">
                     <div className="home-card">
-                        <h3>Here, We will show how to do exercise with video</h3>
+                        <h3>{t('ExerciseVideo.1')}</h3>
                         <ResponsivePlayer />
                     </div>
                     <div className="home-card">
-                        <h3>You can learn how to do exercise with slides</h3>
+                        <h3>{t('ExerciseSlide.1')}</h3>
                         <AliceCarousel disableDotsControls='False'>
                             <img src='/exercise_image/0001.jpg' className="sliderimg" alt=""/>
                             <img src='/exercise_image/0002.jpg' className="sliderimg" alt=""/>

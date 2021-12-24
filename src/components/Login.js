@@ -7,6 +7,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import { useHistory } from "react-router-dom";
 import Headerbar from "./Header";
 import Alert from '@mui/material/Alert';
+import { useTranslation } from 'react-i18next';
 // const AuthApi = React.createContext();
 //const TokenApi = React.createContext();
 
@@ -17,6 +18,8 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
+    const { t } = useTranslation();
+  
 
     const handleMenuClick = (pageURL) => {
       history.push(pageURL)
@@ -60,7 +63,7 @@ const Login = () => {
         <div className='container home-block'>
           <div className='home-card'>
         <form onSubmit={handleSubmit}>
-          <div className="text-title">Diabetes Reversal Project</div>
+          <div className="text-title">{t('ProjectTitle.1')}</div>
               <br />
               <div className='textfield'>
               <div  style={{
@@ -104,7 +107,7 @@ const Login = () => {
               </div>
               </div>
           <div style={{ textAlign: "center" }}>
-                <input className='button-secondary' type="submit" value="Login" />
+                <input className='button-secondary' type="submit" value={t('Login.1')} />
               {errorAlert ?
               (
                 <>
@@ -117,8 +120,8 @@ const Login = () => {
           </div>
           <div className='home-card'>
             <div style={{ textAlign: "center" }}>
-              <p>Don't Have an account yet?</p>
-              <input className='button-secondary' type="submit" value="Register" onClick={() => handleMenuClick('/register')}   />
+              <p>{t('NoAccount.1')}</p>
+              <input className='button-secondary' type="submit" value={t('Register.1')} onClick={() => handleMenuClick('/register')}   />
             </div>
           </div>
           </div>

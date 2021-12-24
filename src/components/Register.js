@@ -21,6 +21,7 @@ import axios from "axios";
 import Alert from '@mui/material/Alert';
 import Link from '@mui/material/Link';
 import { useHistory } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function Register() {
     const [successAlert, setSuccessAlert] = useState(false)
@@ -28,6 +29,7 @@ function Register() {
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
     const history = useHistory();
+    const { t } = useTranslation();
   
     const validationSchema = Yup.object().shape({
       real_name: Yup.string().required('Name is required'),
@@ -66,21 +68,21 @@ function Register() {
   
   const onSubmit = (data, evt) => {
       evt.preventDefault();
-      // console.log(JSON.stringify(data, null, 2));
+      console.log(JSON.stringify(data, null, 2));
       // https://diabetes-backend-wices.herokuapp.com/
-      axios.post("https://diabetes-backend-wices.herokuapp.com/register", data)
-        .then((response) => {
-            console.log("response", response.status)
-            setAlertContent("Your registration was successfully completed.");
-          setSuccessAlert(true);
-          setErrorArlert(false);
-      })
-        .catch((error) => {
-          console.log("error", error.response.data['detail'])
-          setErrorContent(error.response.data['detail'])
-          setSuccessAlert(false);
-          setErrorArlert(true);
-      });
+      // axios.post("https://diabetes-backend-wices.herokuapp.com/register", data)
+      //   .then((response) => {
+      //       console.log("response", response.status)
+      //       setAlertContent("Your registration was successfully completed.");
+      //     setSuccessAlert(true);
+      //     setErrorArlert(false);
+      // })
+      //   .catch((error) => {
+      //     console.log("error", error.response.data['detail'])
+      //     setErrorContent(error.response.data['detail'])
+      //     setSuccessAlert(false);
+      //     setErrorArlert(true);
+      // });
   };
   
     const handleMenuClick = pageURL => {
@@ -94,7 +96,7 @@ function Register() {
       <div className="container home-block">
       <div className="home-card">
         <div className="text-title">
-            <h5>Get Started. Please register to begin.</h5>
+            <h5>{t('GetStarted.1')}</h5>
         </div>
           <Grid>
             <Grid>
@@ -102,7 +104,7 @@ function Register() {
                   required
                   id="username"
                   name="username"
-                  label="Username"
+                  label={t('Username.1')}
                   fullWidth
                   margin="dense"
                   {...register('username')}
@@ -117,7 +119,7 @@ function Register() {
                   required
                   id="name"
                   name="name"
-                  label="Name"
+                  label={t('Name.1')}
                   fullWidth
                   margin="dense"
                   {...register('real_name')}
@@ -132,7 +134,7 @@ function Register() {
                   required
                   id="surname"
                   name="surname"
-                  label="Surname"
+                  label={t('Surname.1')}
                   fullWidth
                   margin="dense"
                   {...register('surname')}
@@ -147,7 +149,7 @@ function Register() {
               <TextField style={{ width: "180px" }}
                   required
                   id="date"
-                  label="Birth Date"
+                  label={t('Birthdate.1')}
                   type="date"
                   format="dd/MM/yyyy"
                   className="textfield"
@@ -168,13 +170,14 @@ function Register() {
                 <RadioGroup
                   row
                   aria-label="gender"
+                  // label={t('Gender.1')}
                   name="row-radio-buttons-group"
                   {...register('gender')}
                   error={errors.gender ? true : false}
                 >
-                      <FormControlLabel value="female" control={<Radio />} label="Female" />
-                      <FormControlLabel value="male" control={<Radio />} label="Male" />
-                      <FormControlLabel value="other" control={<Radio />} label="Other" />
+                      <FormControlLabel value="female" control={<Radio />} label={t('Female.1')} />
+                      <FormControlLabel value="male" control={<Radio />} label={t('Male.1')} />
+                      <FormControlLabel value="other" control={<Radio />} label={t('Other.1')} />
                     </RadioGroup>
                     <Typography variant="inherit" color="textSecondary">
                       {errors.gender?.message}
@@ -205,10 +208,10 @@ function Register() {
                       required
                       id="weight"
                       name="weight"
-                      label="Weight"
+                      label={t('Weight.1')}
                       fullWidth
                       margin="dense"
-                      InputProps={{ endAdornment: ( <InputAdornment position='end'>kg</InputAdornment>)}}
+                      InputProps={{ endAdornment: ( <InputAdornment position='end'>{t('kg.1')}</InputAdornment>)}}
                       {...register('weight')}
                       error={errors.weight ? true : false}
                   />
@@ -223,10 +226,10 @@ function Register() {
                         required
                         id="height"
                         name="height"
-                        label="Height"
+                        label={t('Height.1')}
                         fullWidth
                         margin="dense"
-                        InputProps={{ endAdornment: ( <InputAdornment position='end'>cm</InputAdornment>)}}
+                        InputProps={{ endAdornment: ( <InputAdornment position='end'>{t('cm.1')}</InputAdornment>)}}
                         {...register('height')}
                         error={errors.height ? true : false}
                     />
@@ -241,7 +244,7 @@ function Register() {
                   required
                   id="tel"
                   name="tel"
-                  label="Tel"
+                  label={t('Tel.1')}
                   fullWidth
                   margin="dense"
                   {...register('tel')}
@@ -256,7 +259,7 @@ function Register() {
                   required
                   id="email"
                   name="email"
-                  label="Email"
+                  label={t('Email.1')}
                   fullWidth
                   margin="dense"
                   {...register('email')}
@@ -271,7 +274,7 @@ function Register() {
                             required
                             id="password"
                             name="password"
-                            label="Password"
+                            label={t('Password.1')}
                             type="password"
                             fullWidth
                             margin="dense"
@@ -287,7 +290,7 @@ function Register() {
                             required
                             id="confirmPassword"
                             name="confirmPassword"
-                            label="Confirm Password"
+                            label={t('ConfirmPassword.1')}
                             type="password"
                             fullWidth
                             margin="dense"
@@ -307,7 +310,7 @@ function Register() {
                 sytle={{ cursor: 'pointer' }}
                 style={{background:'#DE5C8E'}}
                 >
-                  Register
+                  {t('Register.1')}
                 </Button>
             </Box>
             <br />

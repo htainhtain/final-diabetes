@@ -13,6 +13,7 @@ import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Alert from '@mui/material/Alert';
+import { useTranslation } from 'react-i18next';
 
 function BloodSugar() {
     const [mealType, setMealType] = useState()
@@ -26,6 +27,7 @@ function BloodSugar() {
     const [alertContent, setAlertContent] = useState('');
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
+    const { t } = useTranslation();
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -112,32 +114,11 @@ function BloodSugar() {
             <Headerbarauth />
             <div className="container home-block">
                 <div className="home-card">
-                    <div className="text-title">Blood Sugar Input</div>
+                    <div className="text-title">{t('BloodSugarInput.1')}</div>
                     <br />
                     <form onSubmit={handleSubmit} style= {{ display: 'flex', flexDirection: 'column'}}>
-                        {/* <NativeSelect label="Meal Type" className="textfield" value={mealType} onChange={(e) => setMealType(e.target.value)}>
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                            <optgroup label="Breakfast">
-                                <option>NA</option>
-                                <option>Before breakfast</option>
-                                <option>After breakfast</option> 
-                            </optgroup>
-                            <optgroup label="Lunch"> 
-                                <option>Before lunch</option>
-                                <option>After lunch</option> 
-                            </optgroup>
-                            <optgroup label="Dinner"> 
-                                <option>Before dinner</option>
-                                <option>After dinner</option> 
-                            </optgroup>
-                            <optgroup label="Other"> 
-                                <option>Before bedtime</option>
-                            </optgroup>  
-                        </NativeSelect> */}
                         <FormControl required sx={{ m: 1, minWidth: 120, paddingBottom: 1 }}>
-                            <InputLabel htmlFor="grouped-native-select">Meal Type</InputLabel>
+                            <InputLabel htmlFor="grouped-native-select">{t('MealType.1')}</InputLabel>
                             <Select
                                 native
                                 defaultValue=""
@@ -148,26 +129,26 @@ function BloodSugar() {
                             >
                             <option aria-label="None" value="" />
                             <optgroup label="Breakfast">
-                                <option value={'Before breakfast'}>Before breakfast</option>
-                                <option value={'After breakfast'}>After breakfast</option>
+                                <option value={'Before breakfast'}>${t('BeforeBreakfast.1')}</option>
+                                <option value={'After breakfast'}>{t('AfterBreakfast.1')}</option>
                             </optgroup>
                             <optgroup label="Lunch">
-                                <option value={'Before lunch'}>Before lunch</option>
-                                <option value={'After lunch'}>After lunch</option>
+                                <option value={'Before lunch'}>{t('BeforeLunch.1')}</option>
+                                <option value={'After lunch'}>{t('AfterLunch.1')}</option>
                             </optgroup>
                             <optgroup label="Dinner">
-                                <option value={'Before dinner'}>Before dinner</option>
-                                <option value={'After dinner'}>After dinner</option>
+                                <option value={'Before dinner'}>{t('BeforeDinner.1')}</option>
+                                <option value={'After dinner'}>{t('AfterDinner.1')}</option>
                             </optgroup>
                             <optgroup label="Other">
-                                <option value={'Before bedtime'}>Before bedtime</option>
+                                <option value={'Before bedtime'}>{t('BeforeBed.1')}</option>
                             </optgroup>
                             </Select>
                         </FormControl>
                         <div >
                             <TextField
                                 required
-                                label="Select time" //measuring time
+                                label={t('SelectTime.1')} //measuring time
                                 id="time" 
                                 type="time"
                                 className="textfield"
@@ -179,7 +160,7 @@ function BloodSugar() {
                         <div>
                             <TextField
                                 required
-                                label="Enter Your Blood Sugar Level" //sugar level
+                                label={t('EnterBloodSugar.1')} //sugar level ใส่ระดับน้ำตาลในเลือดของคุณ
                                 type="number" 
                                 InputProps={{
                                     endAdornment: (
@@ -201,7 +182,7 @@ function BloodSugar() {
                             // color="secondary"
                             style={{backgroundColor: '#DE5C8E'}}
                         >
-                            Submit
+                            {t('Submit.1')}
                         </Button>
                         {successAlert ?
                             (
@@ -220,7 +201,7 @@ function BloodSugar() {
                     </form>
                 </div>
                 <div className="home-card">
-                    <div className="text-title">Your Bloodsugar Record</div>
+                    <div className="text-title">{t('BloodSugarRecord.1')}</div>
                     <Button
                         className='button'
                         value='Submit'
@@ -231,7 +212,7 @@ function BloodSugar() {
                         // color="primary"
                         style={{backgroundColor: '#DE5C8E'}}
                     >
-                        Show/Update Chart
+                        {t('ShowUpdateChart.1')}
                     </Button>
                     <br />
                     <br />
@@ -241,7 +222,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - Before breakfast',
+                                    label: `${t('BloodSugarLevelBeforeBreakfast.1')}`,
                                     backgroundColor: 'rgba(75,192,192,1)',
                                     borderColor: 'rgb(75, 192, 192)',
                                     tension: 0.1,
@@ -258,7 +239,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - After breakfast',
+                                    label: `${t('BloodSugarLevelAfterBreakfast.1')}`,
                                     backgroundColor: 'rgba(75,0,0,1)',
                                     borderColor: 'rgb(75, 0, 0)',
                                     tension: 0.1,
@@ -275,7 +256,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - Before lunch',
+                                    label: `${t('BloodSugarLevelBeforeLunch.1')}`,
                                     backgroundColor: 'rgba(88,100,146,1)',
                                     borderColor: 'rgb(88,100,146)',
                                     tension: 0.1,
@@ -292,7 +273,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - After lunch',
+                                    label: `${t('BloodSugarLevelAfterLunch.1')}`,
                                     backgroundColor: 'rgba(248,66,82,1)',
                                     borderColor: 'rgb(248,66,82)',
                                     tension: 0.1,
@@ -309,7 +290,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - Before Dinner',
+                                    label: `${t('BloodSugarLevelBeforeDinner.1')}`,
                                     backgroundColor: 'rgba(112,12,84,1)',
                                     borderColor: 'rgb(112,12,84)',
                                     tension: 0.1,
@@ -320,7 +301,7 @@ function BloodSugar() {
                         }}
                     />
                     <br></br>
-                    <Line
+                    {/* <Line
                         data={{
                             labels: beforedinner_mealtype.filter(function( element ) {
                                 return element !== undefined;}).slice(-10),
@@ -336,14 +317,14 @@ function BloodSugar() {
                             ],
                         }}
                     />
-                    <br></br>
+                    <br></br> */}
                     <Line
                         data={{
                             labels: afterdinner_mealtype.filter(function( element ) {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - After Dinner',
+                                    label: `${t('BloodSugarLevelAfterDinner.1')}`,
                                     backgroundColor: 'rgba(118,171,187,1)',
                                     borderColor: 'rgb(118,171,187)',
                                     tension: 0.1,
@@ -360,7 +341,7 @@ function BloodSugar() {
                                 return element !== undefined;}).slice(-10),
                             datasets: [
                                 {
-                                    label: 'Blood Sugar Level - Before Bed',
+                                    label: `${t('BloodSugarLevelBeforeBed.1')}`,
                                     backgroundColor: 'rgba(229,239,73,1)',
                                     borderColor: 'rgb(229,239,73)',
                                     tension: 0.1,

@@ -1,12 +1,15 @@
 import React from 'react'
 import "././Main.css";
+import { useTranslation } from 'react-i18next';
 
 function AboutPage() {
+    const { t } = useTranslation();
+
     return (
         <div className="background">
             <div className="container home-block">
                 <div className="home-card">
-                    <div className="text-title">Who are we?</div>
+                    <div className="text-title">{t('Who.1')}</div>
                     <br/>
                     <div style={{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}>
                         <div style={{display: 'flex', flexDirection:'column'}}>

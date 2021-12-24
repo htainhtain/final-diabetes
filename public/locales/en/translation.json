@@ -1,0 +1,227 @@
+{
+    "ProjectTitle": {
+        "1": "Diabetes Reversal Project"
+    },
+    "T2D": {
+        "1": "T2D"
+    },
+    "Food": {
+        "1": "Food"
+    },
+    "Exercise": {
+        "1": "Exercise"
+    },
+    "StressManagement": {
+        "1": "Stress Management"
+    },
+    "About": {
+        "1": "About"
+    },
+    "Login" : {
+        "1": "Login"
+    },
+    "SignUp":{
+        "1": "Sign Up"
+    },
+    "Upload":{
+        "1": "Upload Daily Diet"
+    },
+    "Blood":{
+        "1": "Blood Sugar"
+    },
+    "MyExercise":{
+        "1": "My Exercise"
+    },
+    "Guide":{
+        "1": "Guide"
+    },
+    "Profile":{
+        "1": "Profile"
+    },
+    "LogOut":{
+        "1": "Log Out"
+    },
+    "ExerciseVideo":{
+        "1": "Here, We will show how to do exercise with video"
+    },
+    "ExerciseSlide":{
+        "1": "You can learn how to do exercise with slides"
+    },
+    "Who":{
+        "1": "Who Are We?"
+    },
+    "NoAccount":{
+        "1": "Don't Have an account yet?"
+    },
+    "GetStarted":{
+        "1": "Get Started. Please register to begin."
+    },
+    "Register":{
+        "1": "Register"
+    },
+    "Username":{
+        "1": "Username"
+    },
+    "Name":{
+        "1": "Name"
+    },
+    "Surname":{
+        "1": "Surname"
+    },
+    "Birthdate":{
+        "1": "Birth date"
+    },
+    "Gender":{
+        "1": "Gender"
+    },
+    "Female":{
+        "1": "Female"
+    },
+    "Male":{
+        "1": "Male"
+    },
+    "Other":{
+        "1": "Other"
+    },
+    "Weight":{
+        "1": "Weight"
+    },
+    "Height":{
+        "1": "Height"
+    },
+    "kg":{
+        "1": "kg"
+    },
+    "cm":{
+        "1": "cm"
+    },
+    "Tel":{
+        "1": "Tel"
+    },
+    "Email":{
+        "1": "Email"
+    },
+    "Password":{
+        "1": "Password"
+    },
+    "ConfirmPassword":{
+        "1": "ConfirmPassword"
+    },
+    "UploadFood":{
+        "1": "Upload Food"
+    },
+    "MealType":{
+        "1": "Meal Type"
+    },
+    "ChoosePicture":{
+        "1": "Choose Picture"
+    },
+    "Submit":{
+        "1": "SUBMIT"
+    },
+    "Album":{
+        "1": "Your Daily Diet Album"
+    },
+    "ShowUpdateAlbum":{
+        "1": "SHOW/UPDATE ALBUM"
+    },
+    "None":{
+        "1": "None"
+    },
+    "Breakfast":{
+        "1": "Breakfast"
+    },
+    "Lunch":{
+        "1": "Lunch"
+    },
+    "Dinner":{
+        "1": "Dinner"
+    },
+    "BloodSugarInput":{
+        "1": "Blood Sugar Input"
+    },
+    "SelectTime":{
+        "1": "Select Time"
+    },
+    "BloodSugarRecord":{
+        "1": "Blood Sugar Record"
+    },
+    "ShowUpdateChart":{
+        "1": "Show Update Chart"
+    },
+    "EnterBloodSugar":{
+        "1": "Enter Your Blood Sugar Level"
+    },
+    "BloodSugarLevelBeforeBreakfast":{
+        "1": "Blood Sugar Level - Before Breakfast"
+    },
+    "BloodSugarLevelAfterBreakfast":{
+        "1": "Blood Sugar Level - After Breakfast"
+    },
+    "BloodSugarLevelBeforeLunch":{
+        "1": "Blood Sugar Level - Before Lunch"
+    },
+    "BloodSugarLevelAfterLunch":{
+        "1": "Blood Sugar Level - After Lunch"
+    },
+    "BloodSugarLevelBeforeDinner":{
+        "1": "Blood Sugar Level - Before Dinner"
+    },
+    "BloodSugarLevelAfterDinner":{
+        "1": "Blood Sugar Level - After Dinner"
+    },
+    "BloodSugarLevelBeforeBed":{
+        "1": "Blood Sugar Level - Before Bed"
+    },
+    "BeforeBreakfast":{
+        "1": "Before Breakfast"
+    },
+    "AfterBreakfast":{
+        "1": "After Breakfast"
+    },
+    "BeforeLunch":{
+        "1": "Before Lunch"
+    },
+    "AfterLunch":{
+        "1": "Blood Sugar Level - After Lunch"
+    },
+    "BeforeDinner":{
+        "1": "Before Dinner"
+    },
+    "AfterDinner":{
+        "1": "After Dinner"
+    },
+    "BeforeBed":{
+        "1": "Before Bed"
+    },
+    "LetsDoExercise":{
+        "1": "Let's Do Exercise"
+    },
+    "PutMinute":{
+        "1": "Put your minute for"
+    },
+    "ExerciseMinute":{
+        "1": "Exercise Minute"
+    },
+    "Min":{
+        "1": "min"
+    },
+    "ExerciseData":{
+        "1": "Your Exercise Data"
+    },
+    "ShowUpdateGraph":{
+        "1": "Show/Update Graph"
+    },
+    "WeeklyScore":{
+        "1": "Your Weekly Score - Five Weeks"
+    },
+    "WeeklyMinute":{
+        "1": "Your Weekly Exercise Minute - Five Weeks"
+    },
+    "DailyMinute":{
+        "1": "Your Daily Exercise Minute - One Week"
+    },
+    "To":{
+        "1": "to"
+    }
+}

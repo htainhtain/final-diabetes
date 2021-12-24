@@ -7,6 +7,7 @@ import { TokenApi } from '../App.js';
 import axios from 'axios';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
+import { useTranslation } from 'react-i18next';
 
 function MyExercise2() {
     const [minute, setMinute] = useState()
@@ -14,6 +15,7 @@ function MyExercise2() {
     const [random, setRandom] = useState(Math.random());
     const [graphexerciselist, setgraphexerciselist] = useState([{}])
     const Token = React.useContext(TokenApi)
+    const { t } = useTranslation();
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -105,7 +107,7 @@ function MyExercise2() {
     let score_color = []
 
     for (let x = 4; x > -1; x--) {
-        var this_week_data = moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[0]).format('MM-DD') + ' to ' + moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[6]).format('MM-DD')
+        var this_week_data = moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[0]).format('MM-DD') + ` ${t('To.1')} ` + moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[6]).format('MM-DD')
         var one_week = getWeekDays(getWeekRange(moment(thisweek[6]).subtract(7 * x, 'days'))['from']);
         var each_day_in_week = []
         var each_day_min = 0
@@ -143,23 +145,6 @@ function MyExercise2() {
             score_color.push('rgba(255, 0, 0,1)')
         }
     }
-    console.log("score: ", score)
-    console.log('score_color: ', score_color)
-
-    // console.log("week graph", week_graph)
-    // console.log("this week: ", thisweek[0])
-
-    // console.log("this week: ", thisweek[0])
-    // console.log("this week: ", thisweek[6])
-    // console.log(moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(21, 'days').toDate()))['from'])[0]).format('YYYY-MM-DD'))
-    // console.log(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(14, 'days').toDate()))['from']))
-    // console.log(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7, 'days').toDate()))['from']))
-    // console.log(moment(moment(thisweek[6]).add(1, 'days').toDate()).format('YYYY-MM-DD'))
-    // console.log(moment(moment().subtract(5, 'days').toDate()).format('YYYY-MM-DD'))
-    // console.log(moment(moment().toDate()).format('YYYY-MM-DD'))
-    // console.log(moment(moment().add(4, 'days').toDate()).format('YYYY-MM-DD'))
-    // console.log("getweekdays: ", moment(getWeekDays(getWeekRange('2021-11-14')['from'])[1]).format('YYYY-MM-DD'))
-    // console.log("get week range: ", getWeekRange('2021-11-17'))
 
     return (
         <>
@@ -167,21 +152,21 @@ function MyExercise2() {
                 <Headerbarauth />
                 <div className="container home-block">
                     <div className="home-card">
-                        <div className="text-title">Let's Do Exercise</div>
+                        <div className="text-title">{t('LetsDoExercise.1')}</div>
                         <iframe src="https://giphy.com/embed/12bgKWqBoAMbbG" width="100%" height="272" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
                         <br />
                         <br />
-                        <div className="text-title">Put your minute for { date }.</div>
-                        <form style= {{ display: 'flex', justifyContent: 'space-evenly'}} onClick={handleonclick} >
+                        <div className="text-title">{t('PutMinute.1')} { date }.</div>
+                        <form style= {{ display: 'flex', justifyContent: 'space-evenly'}}  >
                             <TextField
                                 required
                                 onChange={(e) => setMinute(e.target.value)}
                                 value={minute}
-                                label="Exercise Minute"
+                                label={t('ExerciseMinute.1')}
                                 id="outlined-start-adornment"
                                 sx={{ m: 1, width: '25ch' }}
                                 InputProps={{
-                                    startAdornment: <InputAdornment position="start">min</InputAdornment>,
+                                    startAdornment: <InputAdornment position="start">{t('Min.1')}</InputAdornment>,
                                 }}
                             />
                             <Button
@@ -190,20 +175,20 @@ function MyExercise2() {
                                 type="submit"
                                 style={{backgroundColor: '#DE5C8E', color: 'white'}}
                             >
-                                Submit
+                                {t('Submit.1')}
                             </Button>
                         </form>
                     </div>
                     <div className="home-card">
-                        <div className="text-title">Your Exercise Data</div>
-                        <button className='button' value='Submit' type='submit' sytle={{ cursor: 'pointer' }} onClick={showgraph}>Show/Update Graph</button>
+                        <div className="text-title">{t('ExerciseData.1')}</div>
+                        <button className='button' value='Submit' type='submit' sytle={{ cursor: 'pointer' }} onClick={showgraph}>{t('ShowUpdateGraph.1')}</button>
                         <br />
                         <Bar
                             data={{
                                 labels: week_graph,
                                 datasets: [
                                     {
-                                        label: 'Your Weekly Score - Five Weeks',
+                                        label: `${t('WeeklyScore.1')}`,
                                         backgroundColor: score_color,
                                         borderColor: 'rgb(88,100,146)',
                                         tension: 0.1,
@@ -218,7 +203,7 @@ function MyExercise2() {
                                 labels: week_graph,
                                 datasets: [
                                     {
-                                        label: 'Your Weekly Exercise Minute - Five Weeks',
+                                        label: `${t('WeeklyMinute.1')}`,
                                         backgroundColor: score_color,
                                         borderColor: 'rgb(88,100,146)',
                                         tension: 0.1,
@@ -233,7 +218,7 @@ function MyExercise2() {
                                 labels: days_graph,
                                 datasets: [
                                     {
-                                        label: 'Your Daily Exercise Minute - One Week',
+                                        label: `${t('DailyMinute.1')}`,
                                         backgroundColor: 'rgba(75,192,192,1)',
                                         borderColor: 'rgb(75, 192, 192)',
                                         tension: 0.1,
