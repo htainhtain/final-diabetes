@@ -17,7 +17,7 @@ function User() {
     // https://fastapi-app-diabetes.herokuapp.com/login
     const getdata = async () => {
         let res = await axios
-        .get("https://diabetes-backend-wices.herokuapp.com/", { headers })
+        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
             .then((response) => {
             return response.data;
         });

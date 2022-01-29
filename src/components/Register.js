@@ -69,20 +69,20 @@ function Register() {
   const onSubmit = (data, evt) => {
       evt.preventDefault();
       console.log(JSON.stringify(data, null, 2));
-      // https://diabetes-backend-wices.herokuapp.com/
-      // axios.post("https://diabetes-backend-wices.herokuapp.com/register", data)
-      //   .then((response) => {
-      //       console.log("response", response.status)
-      //       setAlertContent("Your registration was successfully completed.");
-      //     setSuccessAlert(true);
-      //     setErrorArlert(false);
-      // })
-      //   .catch((error) => {
-      //     console.log("error", error.response.data['detail'])
-      //     setErrorContent(error.response.data['detail'])
-      //     setSuccessAlert(false);
-      //     setErrorArlert(true);
-      // });
+      https://diabetes-backend-wices.herokuapp.com/
+      axios.post("https://diabetes-wices-backend.herokuapp.com/register", data)
+        .then((response) => {
+            console.log("response", response.status)
+            setAlertContent("Your registration was successfully completed.");
+          setSuccessAlert(true);
+          setErrorArlert(false);
+      })
+        .catch((error) => {
+          console.log("error", error.response.data['detail'])
+          setErrorContent(error.response.data['detail'])
+          setSuccessAlert(false);
+          setErrorArlert(true);
+      });
   };
   
     const handleMenuClick = pageURL => {

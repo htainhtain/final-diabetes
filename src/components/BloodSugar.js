@@ -39,7 +39,7 @@ function BloodSugar() {
 
     const getdata = async () => {
         let res = await axios
-        .get("https://diabetes-backend-wices.herokuapp.com/", { headers })
+        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
             .then((response) => {
             return response.data;
         });
@@ -62,7 +62,7 @@ function BloodSugar() {
             "date": date,
             "bloodsugar": bloodsugar
         };
-        axios.post(`https://diabetes-backend-wices.herokuapp.com/api/create_bloodsugar/${data.username}`, bloodsugar_data)
+        axios.post(`https://diabetes-wices-backend.herokuapp.com/api/create_bloodsugar/${data.username}`, bloodsugar_data)
         .then((response) => {
           console.log(response);
           setAlertContent("Blood Sugar has been put.");
@@ -80,7 +80,7 @@ function BloodSugar() {
 
     useEffect(() => {
         async function fetchblooddata() {
-            const result = await axios.get(`https://diabetes-backend-wices.herokuapp.com/api/get_bloodsugar/${data.username}`);
+            const result = await axios.get(`https://diabetes-wices-backend.herokuapp.com/api/get_bloodsugar/${data.username}`);
             setbloodsugardata(result.data)
             console.log(bloodsugardata)
         }
@@ -129,7 +129,7 @@ function BloodSugar() {
                             >
                             <option aria-label="None" value="" />
                             <optgroup label="Breakfast">
-                                <option value={'Before breakfast'}>${t('BeforeBreakfast.1')}</option>
+                                <option value={'Before breakfast'}>{t('BeforeBreakfast.1')}</option>
                                 <option value={'After breakfast'}>{t('AfterBreakfast.1')}</option>
                             </optgroup>
                             <optgroup label="Lunch">

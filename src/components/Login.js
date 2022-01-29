@@ -37,13 +37,13 @@ const Login = () => {
       const news = async () => {
         // let res = await axios.post("http://127.0.0.1:8000/login", data)
         // https://diabetes-backend-wices.herokuapp.com/
-        let res = await axios.post("https://diabetes-backend-wices.herokuapp.com/login", data)
+        let res = await axios.post("https://diabetes-wices-backend.herokuapp.com/login", data)
           .then((response) => {
             Cookies.set("token", response.data.access_token);
             return response;
           })
           .catch((error) => {
-            console.log("error", error.response.data['detail'])
+            // console.log("error", error.response.data['detail'])
             setErrorContent(error.response.data['detail'])
             setErrorArlert(true);
         });

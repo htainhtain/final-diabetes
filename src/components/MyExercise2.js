@@ -18,7 +18,7 @@ function MyExercise2() {
     const { t } = useTranslation();
 
     var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var date = moment().format('YYYY-MM-DD')
 
     const thisweek = getWeekDays(getWeekRange(date)['from']);
     let days_graph = [];
@@ -31,7 +31,7 @@ function MyExercise2() {
 
     const getdata = async () => {
         let res = await axios
-        .get("https://diabetes-backend-wices.herokuapp.com/", { headers })
+        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
             .then((response) => {
             return response.data;
         });
@@ -41,27 +41,23 @@ function MyExercise2() {
     useEffect(async () => {
         let x = await getdata();
         setData(x);
-        console.log('x: ', x);
+        // console.log('x: ', x);
     }, []);
 
     const handleonclick = (e) => {
         e.preventDefault();
-        axios.post(`https://diabetes-backend-wices.herokuapp.com/api/create_myexercise/${data.username}`, {
+        axios.post(`https://diabetes-wices-backend.herokuapp.com/api/create_myexercise/${data.username}`, {
             'minute': minute,
             'date': date
           })
-            .then(res => console.log(res))
     }
 
     useEffect(() => {
         async function fetchexercisegraphdata() {
-            const result = await axios.get(`https://diabetes-backend-wices.herokuapp.com/api/get_myexercise/${data.username}`);
+            const result = await axios.get(`https://diabetes-wices-backend.herokuapp.com/api/get_myexercise/${data.username}`);
             setgraphexerciselist(result.data)
-            // console.log("graphexerciselist",graphexerciselist[0]['date'])
         }
         fetchexercisegraphdata();
-
-
     }, [random]);
 
     for (let i = 0; i < thisweek.length; i++) {
@@ -115,7 +111,6 @@ function MyExercise2() {
             each_day_in_week.push(moment(one_week[y]).format('YYYY-MM-DD'))
             for (let j = 0; j < graphexerciselist.length; j++) {
                 if (each_day_in_week[y] === graphexerciselist[j]['date']) {
-                    console.log("graphexerciselist[j]['minute']: ", graphexerciselist[j]['minute'], "date: ", each_day_in_week[y])
                     each_day_min += Number(graphexerciselist[j]['minute'])
                 }
             }
@@ -157,7 +152,7 @@ function MyExercise2() {
                         <br />
                         <br />
                         <div className="text-title">{t('PutMinute.1')} { date }.</div>
-                        <form style= {{ display: 'flex', justifyContent: 'space-evenly'}}  >
+                        <form style= {{ display: 'flex', justifyContent: 'space-evenly'}}  onClick={handleonclick}>
                             <TextField
                                 required
                                 onChange={(e) => setMinute(e.target.value)}
