@@ -5,8 +5,6 @@ import {
 } from "react-router-dom";
 
 const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
-  console.log("Here in Protected route")
-  console.log("component", Component)
     return (
       <Route
         {...rest}

@@ -1,70 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import Headerbarauth from './Headerauth';
 import { Line } from 'react-chartjs-2';
-import NativeSelect from "@material-ui/core/NativeSelect";
 import { TextField } from '@material-ui/core';
 import { InputAdornment } from '@material-ui/core';
-import { TokenApi } from '../App.js';
 import axios from 'axios';
 import "./Main.css";
 import { Button } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Alert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 function BloodSugar() {
     const [mealType, setMealType] = useState()
     const [time, setTime] = useState()
     const [bloodsugar, setBloodSugar] = useState()
-    const [data, setData] = useState("");
     const [bloodsugardata, setbloodsugardata] = useState([]);
     const [random, setRandom] = useState(Math.random());
-    const Token = React.useContext(TokenApi)
     const [successAlert, setSuccessAlert] = useState(false)
     const [alertContent, setAlertContent] = useState('');
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
     const { t } = useTranslation();
+    const { currentUser, backendUrl } = useAuth()
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
-    let toke = Token.token;
-    const headers = {
-        Authorization: `Bearer ${toke}`,
-    };
-
-    const getdata = async () => {
-        let res = await axios
-        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
-            .then((response) => {
-            return response.data;
-        });
-        return res;
-    };
-
-    useEffect(async () => {
-        let x = await getdata();
-        setData(x);
-        console.log('x: ', x);
-    }, []);
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
         const bloodsugar_data = {
-            "username": data.username,
+            "username": currentUser,
             "mealtype": mealType,
             "time": time,
             "date": date,
             "bloodsugar": bloodsugar
         };
-        axios.post(`https://diabetes-wices-backend.herokuapp.com/api/create_bloodsugar/${data.username}`, bloodsugar_data)
+        axios.post(`${backendUrl}create_bloodsugar/${currentUser}`, bloodsugar_data)
         .then((response) => {
-          console.log(response);
           setAlertContent("Blood Sugar has been put.");
           setSuccessAlert(true);
           setErrorArlert(false);
@@ -80,9 +56,8 @@ function BloodSugar() {
 
     useEffect(() => {
         async function fetchblooddata() {
-            const result = await axios.get(`https://diabetes-wices-backend.herokuapp.com/api/get_bloodsugar/${data.username}`);
+            const result = await axios.get(`${backendUrl}get_bloodsugar/${currentUser}`);
             setbloodsugardata(result.data)
-            console.log(bloodsugardata)
         }
         fetchblooddata();
     }, [random]);
@@ -301,23 +276,6 @@ function BloodSugar() {
                         }}
                     />
                     <br></br>
-                    {/* <Line
-                        data={{
-                            labels: beforedinner_mealtype.filter(function( element ) {
-                                return element !== undefined;}).slice(-10),
-                            datasets: [
-                                {
-                                    label: 'Blood Sugar Level - Before Dinner',
-                                    backgroundColor: 'rgba(112,12,84,1)',
-                                    borderColor: 'rgb(112,12,84)',
-                                    tension: 0.1,
-                                    data: beforedinner_blooddata.filter(function( element ) {
-                                        return element !== undefined;}).slice(-10)
-                                }
-                            ],
-                        }}
-                    />
-                    <br></br> */}
                     <Line
                         data={{
                             labels: afterdinner_mealtype.filter(function( element ) {

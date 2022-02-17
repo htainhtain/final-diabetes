@@ -6,14 +6,13 @@ import { Button } from "@material-ui/core";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import { TokenApi } from '../App.js';
-import axios from 'axios';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import Alert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 const db = app.firestore();
 
@@ -27,32 +26,7 @@ function Uploadfoodpage() {
     const [errorAlert, setErrorArlert] = useState(false)
     const [errorContent, setErrorContent] = useState('');
     const { t } = useTranslation();
-
-    // for username & auth 
-    const [userdata, setUserData] = useState("");
-    const Token = React.useContext(TokenApi)
-
-    let toke = Token.token;
-    const headers = {
-        Authorization: `Bearer ${toke}`,
-    };
-    // https://fastapi-app-diabetes.herokuapp.com/login
-    const getdata = async () => {
-        let res = await axios
-        // .get("http://127.0.0.1:8000/", { headers })
-        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
-            .then((response) => {
-            return response.data;
-        });
-        return res;
-    };
-
-    useEffect(async () => {
-        let x = await getdata();
-        setUserData(x);
-        console.log('x: ', x);
-    }, []);
-    // for username & auth 
+    const { currentUser} = useAuth()
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -60,11 +34,10 @@ function Uploadfoodpage() {
     const onSubmit = async (e) => {
         e.preventDefault();
         const username = e.target.username.value;
-        console.log("username1", userdata.username)
         if (!username || !fileUrl) {
           return;
         }
-        await db.collection(userdata.username).doc(username).set({
+        await db.collection(currentUser).doc(username).set({
           name: username,
           avatar: fileUrl,
           mealType: mealType,
@@ -94,8 +67,7 @@ function Uploadfoodpage() {
 
     useEffect(() => {
         async function fetchUsers() {
-            let x = await getdata();
-            const usersCollection = await db.collection(x.username).get();
+            const usersCollection = await db.collection(currentUser).get();
             setUsers(
                 usersCollection.docs.map((doc) => {
                     return doc.data();

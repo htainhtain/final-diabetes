@@ -1,177 +1,285 @@
-import Headerbarauth from './Headerauth';
 import React, { useState, useEffect } from 'react';
+import Headerbarauth from './Headerauth';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
 import axios from 'axios';
-import { TokenApi } from '../App.js';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
+import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
-// import "./Main.css";
+import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
 
 function MyExercise() {
-    const [exerciseList, setExerciseList] = useState([{}])
-    const [data, setData] = useState("");
+    const [minute, setMinute] = useState()
     const [random, setRandom] = useState(Math.random());
-    const [random2, setRandom2] = useState(Math.random());
     const [graphexerciselist, setgraphexerciselist] = useState([{}])
-    const Token = React.useContext(TokenApi)
-    let done_data_inside = []
-    let exercise_data_inside = []
-    let today_date = "2021-10-21";
+    const { t } = useTranslation();
+    const { currentUser, backendUrl } = useAuth()
+    const [intensity, setIntensity] = useState()
 
-    let toke = Token.token;
-    const headers = {
-        Authorization: `Bearer ${toke}`,
-    };
+    var today = new Date();
+    var date = moment().format('YYYY-MM-DD')
 
-    const getdata = async () => {
-        let res = await axios
-        .get("http://127.0.0.1:8000/", { headers })
-            .then((response) => {
-            return response.data;
-        });
-        return res;
-    };
-
-    useEffect(async () => {
-        let x = await getdata();
-        setData(x);
-        console.log('x: ', x);
-    }, []);
-
-    const reRender = () => setRandom(Math.random());
-
-    useEffect(() => {
-        async function fetchexercisedata() {
-            const result = await axios.get(`http://localhost:8000/api/get_myexercise/${data.username}`);
-            setExerciseList(result.data)
-            console.log("come here")
-        }
-        fetchexercisedata();
-    }, [random]);
-
-    let exercise_data = exerciseList.map((item) => { if (item.date == '2021-10-21') { return item.exercise } })
-    let done_data = exerciseList.map((item) => { if (item.date == '2021-10-21') { return item.done } })
-    const [checked, setChecked] = React.useState([]);
-
-
-    const handleToggle = (value) => () => {
-      const currentIndex = checked.indexOf(value);
-      const newChecked = [...checked];
-        
-      if (currentIndex === -1) {
-        newChecked.push(value);
-      } else {
-        newChecked.splice(currentIndex, 1);
-      }
-        console.log("currentIndex", currentIndex)
-        console.log("newChecked", newChecked)
-        exercise_data_inside = exercise_data.filter(function( element ) {return element !== undefined;})
-        done_data_inside = [false,false,false]
-        for (let i = 0; i < exercise_data_inside.length; i++){
-            for (let j = 0; j < newChecked.length; j++){
-                done_data_inside[exercise_data_inside.indexOf(newChecked[j])] = true
-            }
-            async function updateexercisedata() {
-                const result = await axios.put(`http://localhost:8000/api/update_myexercise/${data.username}/${exercise_data_inside[i]}/${today_date}/${done_data_inside[i]}`);
-            }
-            updateexercisedata()
-        }
-        setChecked(newChecked);
-    };
+    const thisweek = getWeekDays(getWeekRange(date)['from']);
+    let days_graph = [];
+    let min_per_day = [];
+    let intensityPerDay = [];
+    let intensityColor = []
+    
+    const handleonclick = (e) => {
+        e.preventDefault();
+        axios.post(`${backendUrl}create_myexercise/${currentUser}`, {
+            'minute': minute,
+            'intensity': intensity,
+            'date': date
+          })
+    }
 
     useEffect(() => {
         async function fetchexercisegraphdata() {
-            const result = await axios.get(`http://localhost:8000/api/get_myexercise/${data.username}`);
+            const result = await axios.get(`${backendUrl}get_myexercise/${currentUser}`);
             setgraphexerciselist(result.data)
-            console.log("graphexerciselist",graphexerciselist)
         }
         fetchexercisegraphdata();
-    }, [random2]);
+        console.log("graphexerciselist: ", graphexerciselist)
+    }, [random]);
+    
 
-    let graph_done_data = graphexerciselist.map((item) => { return item.done })
-    let graph_date_data = graphexerciselist.map((item) => { return item.date })
-    let graph_unique_date_data = [...new Set(graph_date_data)]
-    const [pointdata, setpointdata] = useState([])
-    console.log("graph_unique_date_data", graph_unique_date_data)
-    console.log("point_data", pointdata)
+    for (let i = 0; i < thisweek.length; i++) {
+        days_graph.push(moment(thisweek[i]).format('YYYY-MM-DD'))
+        min_per_day.push(0)
+        intensityPerDay.push(0)
+        for (let j = 0; j < graphexerciselist.length; j++) {
+            if (days_graph[i] === graphexerciselist[j]['date']) {
+                min_per_day[i] = Number(graphexerciselist[j]['minute'])
+                intensityPerDay[i] = graphexerciselist[j]['intensity']
+            }
+        }
+    }
+    console.log("intensityPerDay: ", intensityPerDay)
 
     const showgraph = () => {
-        let point_data = []
-        for (let i = 0; i < graph_unique_date_data.length; i++){
-            let points = 0
-            for (let j = 0; j < graph_date_data.length; j++){
-                if (graph_unique_date_data[i] === graph_date_data[j]) {
-                    if (graph_done_data[j] === true) {
-                        points++
-                    }
+        setRandom(Math.random());
+    }
+
+    function getWeekDays(weekStart) {
+        const days = [weekStart];
+        for (let i = 1; i < 7; i += 1) {
+          days.push(
+              moment(weekStart)
+              .add(i, 'days')
+              .toDate()
+          );
+        }
+        return days;
+    }
+
+    function getWeekRange(date) {
+        return {
+          from: moment(date)
+            .startOf('week')
+            .toDate(),
+          to: moment(date)
+            .endOf('week')
+            .toDate(),
+        };
+    }
+
+    let week_graph = []
+    let each_week_score = []
+    let score = []
+    let score_color = []
+
+    for (let x = 4; x > -1; x--) {
+        var this_week_data = moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[0]).format('MM-DD') + ` ${t('To.1')} ` + moment(getWeekDays(getWeekRange(moment(moment(thisweek[6]).subtract(7 * x, 'days').toDate()))['from'])[6]).format('MM-DD')
+        var one_week = getWeekDays(getWeekRange(moment(thisweek[6]).subtract(7 * x, 'days'))['from']);
+        var each_day_in_week = []
+        var each_day_min = 0
+        for (let y = 0; y < one_week.length; y++) {
+            each_day_in_week.push(moment(one_week[y]).format('YYYY-MM-DD'))
+            for (let j = 0; j < graphexerciselist.length; j++) {
+                if (each_day_in_week[y] === graphexerciselist[j]['date']) {
+                    each_day_min += Number(graphexerciselist[j]['minute'])
                 }
             }
-            point_data.push(points)
         }
-        setpointdata(point_data)
-        setRandom2(Math.random());
-    } 
+        each_week_score.push(each_day_min)
+        week_graph.push(this_week_data)
+    }
 
+    for (let z = 0; z < each_week_score.length; z++) {
+        if (each_week_score[z] >= 150) {
+            score.push(5)
+            score_color.push('rgba(3,201,169,1)')
+        } else if (each_week_score[z] > 120) {
+            score.push(4)
+            score_color.push('rgba(30,130,76,1)')
+        } else if (each_week_score[z] > 90) {
+            score.push(3)
+            score_color.push('rgba(255,192,203,1)')
+        } else if (each_week_score[z] > 60) {
+            score.push(2)
+            score_color.push('rgba(255,99,71,1)')
+        } else if (each_week_score[z] > 30) {
+            score.push(1)
+            score_color.push('rgba(108,122,137,1)')
+        } else {
+            score.push(0)
+            score_color.push('rgba(255, 0, 0,1)')
+        }
+    }
+
+    for (let a = 0; a < intensityPerDay.length; a++){
+        console.log(a)
+        if (intensityPerDay[a] === 'light') {
+            intensityColor.push('rgb(0,255,0)')
+        } else if (intensityPerDay[a] === 'moderate') {
+            intensityColor.push('rgb(255,140,0)')
+        } else {
+            intensityColor.push('rgb(139,0,0)')
+        }
+    }
+ 
     return (
-        <div className="background">
-            <Headerbarauth />
-            <div className="container home-block">
-                <div className="home-card">
-                    <div className="text-title">Let's Do Exercise</div>
-                    <iframe src="https://giphy.com/embed/26DMTbM0OAxbdPiYo" width="100%" height="400" frameBorder="0" class="giphy-embed" allowFullScreen ></iframe><p></p>
-                    <button className='button' value='Submit' type='submit' sytle={{ cursor: 'pointer' }} onClick={reRender}>Exercises To Do List</button>
-                    <div style={{ fontSize: "18px", justifyContent: 'center' }}>Your Exercises To Do</div>
-                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                            {exercise_data.filter(function( element ) {
-                            return element !== undefined;}).map((value) => {
-                                const labelId = `checkbox-${value}`;
-                                // console.log("labelId", labelId)
-                                return (
-                                <ListItem
-                                    key={value}
-                                    disablePadding
-                                >
-                                    <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
-                                    <ListItemIcon>
-                                        <Checkbox
-                                        edge="start"
-                                        checked={checked.indexOf(value) !== -1}
-                                        tabIndex={-1}
-                                        disableRipple
-                                        inputProps={{ 'aria-labelledby': labelId }}
-                                        />
-                                    </ListItemIcon>
-                                    <ListItemText id={labelId} primary={`${value}`} />
-                                    </ListItemButton>
-                                </ListItem>
-                                );
-                            })}
-                    </List>
+        <>
+            <div className="background">
+                <Headerbarauth />
+                <div className="container home-block">
+                    <div className="home-card">
+                        <div className="text-title">{t('LetsDoExercise.1')}</div>
+                        <div className="text-title">{t('PutMinute.1')} { date }.</div>
+                        <form style= {{ display: 'flex', justifyContent: 'space-evenly', flexDirection: 'column'}}  onClick={handleonclick}>
+                            <FormControl required sx={{ m: 1, minWidth: 120, paddingBottom: 1 }}>
+                                <InputLabel id="demo-simple-select-helper-label">{t('intensity.1')}</InputLabel>
+                                <Select
+                                    required
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    value={intensity}
+                                    label='intensity'
+                                    onChange={(e) => setIntensity(e.target.value)}
+                                    >
+                                    <MenuItem value="">
+                                        <em>{t('None.1')}</em>
+                                    </MenuItem>
+                                    <MenuItem value={'light'}>{t('light.1')}</MenuItem>
+                                    <MenuItem value={'moderate'}>{t('moderate.1')}</MenuItem>
+                                    <MenuItem value={'vigorous'}>{t('vigorous.1')}</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <TextField
+                                required
+                                onChange={(e) => setMinute(e.target.value)}
+                                value={minute}
+                                label={t('ExerciseMinute.1')}
+                                id="outlined-start-adornment"
+                                sx={{ m: 1, width: '25ch' }}
+                                InputProps={{
+                                    startAdornment: <InputAdornment position="start">{t('Min.1')}</InputAdornment>,
+                                }}
+                            />
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                type="submit"
+                                style={{backgroundColor: '#DE5C8E', color: 'white'}}
+                            >
+                                {t('Submit.1')}
+                            </Button>
+                        </form>
+                    </div>
+                    <div className="home-card">
+                        <div className="text-title">{t('ExerciseData.1')}</div>
+                        <button className='button' value='Submit' type='submit' sytle={{ cursor: 'pointer' }} onClick={showgraph}>{t('ShowUpdateGraph.1')}</button>
+                        <br />
+                        <div className="text-title">Colors and score</div>
+                        
+                        <div style= {{ display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row'}}>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(3,201,169,1)' }}>
+                                <Button style={{color: 'white'}}>5</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(30,130,76,1)' }}>
+                                <Button style={{color: 'white'}}>4</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(255,192,203,1)' }}>
+                                <Button style={{color: 'white'}}>3</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(255,99,71,1)' }}>
+                                <Button style={{color: 'white'}}>2</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(108,122,137,1)' }}>
+                                <Button style={{color: 'white'}}>1</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgba(255, 0, 0,1)' }}>
+                                <Button style={{color: 'white'}} >0</Button>
+                            </Box>
+                        </div>
+                        <Bar
+                            data={{
+                                labels: week_graph,
+                                datasets: [
+                                    {
+                                        label: `${t('WeeklyScore.1')}`,
+                                        backgroundColor: score_color,
+                                        borderColor: 'rgb(88,100,146)',
+                                        tension: 0.1,
+                                        data: score
+                                    }
+                                ],
+                            }}
+                        />
+                        <br />
+                        <Bar
+                            data={{
+                                labels: week_graph,
+                                datasets: [
+                                    {
+                                        label: `${t('WeeklyMinute.1')}`,
+                                        backgroundColor: score_color,
+                                        borderColor: 'rgb(88,100,146)',
+                                        tension: 0.1,
+                                        data: each_week_score
+                                    }
+                                ],
+                            }}
+                        />
+                        <br />
+                        <br />
+                        <div style= {{ display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row'}}>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgb(0,255,0)' }}>
+                                <Button style={{color: 'white'}}>{t('light.1')}</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.5, backgroundColor: 'rgb(255,140,0)' }}>
+                                <Button style={{color: 'white'}} >{t('moderate.1')}</Button>
+                            </Box>
+                            <Box component="span" sx={{ p: 0.1, backgroundColor: 'rgb(139,0,0)' }}>
+                                <Button style={{color: 'white'}}>{t('vigorous.1')}</Button>
+                            </Box>
+                        </div>
+                        <br />
+                        <Bar
+                            data={{
+                                labels: days_graph,
+                                datasets: [
+                                    {
+                                        label: `${t('DailyMinute.1')}`,
+                                        backgroundColor: intensityColor,
+                                        borderColor: 'rgb(75, 192, 192)',
+                                        tension: 0.1,
+                                        data: min_per_day
+                                    }
+                                ],
+                            }}
+                        />
+                    </div>
                 </div>
-                <div className="home-card">
-                    <div className="text-title">Your Exercise Data</div>
-                    <button className='button' value='Submit' type='submit' sytle={{ cursor: 'pointer' }} onClick={showgraph}>Show/Update Graph</button>
-                    <Bar
-                        data={{
-                            labels: graph_unique_date_data,
-                            datasets: [
-                                {
-                                    label: 'Your Daily Exercise Done',
-                                    backgroundColor: 'rgba(75,192,192,1)',
-                                    borderColor: 'rgb(75, 192, 192)',
-                                    tension: 0.1,
-                                    data: pointdata
-                                }
-                            ],
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
+            </div>  
+        </>
     )
 }
 

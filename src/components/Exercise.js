@@ -10,9 +10,7 @@ function Exercise() {
   const Auth = useContext(AuthApi)
   const Lang = useContext(LanguageApi)
   const { t } = useTranslation();
-
-  // console.log("Lang in exercise: ", Lang)
-
+  
   return (
     <>
         <Helmet>

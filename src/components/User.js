@@ -4,31 +4,11 @@ import axios from 'axios';
 import { TokenApi } from '../App.js';
 import "./user.css";
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../contexts/AuthContext';
 
 function User() {
-    const [data, setData] = useState("");
-    const Token = React.useContext(TokenApi)
     const { t } = useTranslation();
-    
-    let toke = Token.token;
-    const headers = {
-        Authorization: `Bearer ${toke}`,
-    };
-    // https://fastapi-app-diabetes.herokuapp.com/login
-    const getdata = async () => {
-        let res = await axios
-        .get("https://diabetes-wices-backend.herokuapp.com/", { headers })
-            .then((response) => {
-            return response.data;
-        });
-        return res;
-    };
-
-    useEffect(async () => {
-        let x = await getdata();
-        setData(x);
-        console.log('x: ', x);
-    }, []);
+    const { data, currentUser } = useAuth()
 
     return (
         

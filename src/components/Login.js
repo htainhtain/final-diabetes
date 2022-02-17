@@ -8,12 +8,9 @@ import { useHistory } from "react-router-dom";
 import Headerbar from "./Header";
 import Alert from '@mui/material/Alert';
 import { useTranslation } from 'react-i18next';
-// const AuthApi = React.createContext();
-//const TokenApi = React.createContext();
 
 const Login = () => {
     const history = useHistory();
-    // const Auth = React.useContext(AuthApi);
     const [username, setName] = useState("");
     const [password, setPassword] = useState("");
     const [errorAlert, setErrorArlert] = useState(false)
@@ -33,17 +30,13 @@ const Login = () => {
       const data = new FormData();
       data.append('username', username);
       data.append('password', password);
-      // https://fastapi-app-diabetes.herokuapp.com
       const news = async () => {
-        // let res = await axios.post("http://127.0.0.1:8000/login", data)
-        // https://diabetes-backend-wices.herokuapp.com/
-        let res = await axios.post("https://diabetes-wices-backend.herokuapp.com/login", data)
+        let res = await axios.post(`https://diabetes-wices-backend.herokuapp.com/login`, data)
           .then((response) => {
             Cookies.set("token", response.data.access_token);
             return response;
           })
           .catch((error) => {
-            // console.log("error", error.response.data['detail'])
             setErrorContent(error.response.data['detail'])
             setErrorArlert(true);
         });
@@ -84,8 +77,6 @@ const Login = () => {
 
               </div>
               </div>
-          {/* <br />
-              <br /> */}
               <div className='textfield'>
               <div  style={{
                             display: 'flex',

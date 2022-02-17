@@ -223,5 +223,18 @@
     },
     "To":{
         "1": "to"
+    },
+    "intensity":{
+        "1": "intensity"
+    },
+    "light":{
+        "1": "light"
+    },
+    "moderate":{
+        "1": "moderate"
+    },
+    "vigorous":{
+        "1": "vigorous"
     }
+
 }

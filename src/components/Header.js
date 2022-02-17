@@ -137,8 +137,6 @@ export default function Heroku() {
   const [check, setCheck] = React.useState(true)
   const Lang = React.useContext(LanguageApi)
 
-  // console.log("Lang inside Header: ", Lang)
-
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -163,7 +161,6 @@ export default function Heroku() {
   }
 
   React.useEffect(() => {
-    console.log(i18next['language'])
     if (i18next['language'] === 'en-US' ||  i18next['language'] === 'en') {
       setCheck(false)
       Lang.setLang('en')
@@ -173,8 +170,6 @@ export default function Heroku() {
       Lang.setLang('th')
     }
   })
-
-  console.log("check: ", check)
   
   return (
     <div className={classes.root}>

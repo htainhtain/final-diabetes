@@ -16,11 +16,11 @@ import Exercise from "./components/Exercise";
 import User from "./components/User";
 import BloodSugar  from "./components/BloodSugar";
 import Uploadfood from "./components/Uploadfood";
-// import MyExercise from "./components/MyExercise";
 import About from "./components/About";
 import Stress from "./components/Stress";
-import MyExercise2 from "./components/MyExercise2";
+import MyExercise from "./components/MyExercise";
 import Test from "./components/Test";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export const AuthApi = React.createContext();
 export const TokenApi = React.createContext();
@@ -48,20 +48,20 @@ function App() {
   
   React.useEffect(() => {
     readCookie();
-    console.log("App - readcookie")
   }, []);
-  console.log("App - program")
 
   return (
     <>
       <AuthApi.Provider value={{ auth, setAuth }}>
         <TokenApi.Provider value={{ token, setToken }}>
           <LanguageApi.Provider value={{ lang, setLang }}>
-            <Router>
-              <div>
-                <Routes />
-              </div>
-            </Router>
+            <AuthProvider>
+              <Router>
+                <div>
+                    <Routes />
+                </div>
+              </Router>
+            </AuthProvider>
           </LanguageApi.Provider>
         </TokenApi.Provider>
       </AuthApi.Provider>
@@ -117,13 +117,7 @@ const Routes = () => {
         <ProtectedRoute
             exact path="/myexercise"
             auth={Auth.auth}
-            component={MyExercise2}
-        >
-        </ProtectedRoute>
-        <ProtectedRoute
-            exact path="/myexercise2"
-            auth={Auth.auth}
-            component={MyExercise2}
+            component={MyExercise}
         >
         </ProtectedRoute>
         <ProtectedLogin
