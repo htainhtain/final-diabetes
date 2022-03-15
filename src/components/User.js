@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Headerbarauth from './Headerauth';
-import axios from 'axios';
-import { TokenApi } from '../App.js';
 import "./user.css";
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 
 function User() {
     const { t } = useTranslation();
-    const { data, currentUser } = useAuth()
+    const { data } = useAuth()
 
     return (
         

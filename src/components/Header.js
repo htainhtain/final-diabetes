@@ -210,7 +210,8 @@ export default function Heroku() {
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/diabetes2')}>{t('T2D.1')}</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/food')}>{t('Food.1')}</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/exercise')}>{t('Exercise.1')}</MenuItem>
-                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>Glucose Converter</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/about')}>{t('About.1')}</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/login')}>{t('Login.1')}</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/register')}>{t('SignUp.1')}</MenuItem>  
@@ -253,6 +254,13 @@ export default function Heroku() {
                   >
                   <Typography variant="subtitle1"> {t('StressManagement.1')} </Typography>
               </IconButton>
+              {/* <IconButton
+                      size="large"
+                      color="inherit"
+                      onClick={() => handleMenuClick('/glucoseconverter')}          
+                  >
+                  <Typography variant="subtitle1"> Glucose Converter </Typography>
+              </IconButton>   */}
               <IconButton
                     size="large"
                     color="inherit"

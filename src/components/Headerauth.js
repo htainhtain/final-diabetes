@@ -148,9 +148,9 @@ export default function Heroku() {
     setAnchorEl(null);
   };
 
-  const handleButtonClick = pageURL => {
-    history.push(pageURL);
-  };
+  // const handleButtonClick = pageURL => {
+  //   history.push(pageURL);
+  // };
 
   const handleonclick = () => {
     Auth.setAuth(false);
@@ -221,7 +221,8 @@ export default function Heroku() {
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/diabetes2')}>{t('T2D.1')}</MenuItem>
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/food')}>{t('Food.1')}</MenuItem>
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/exercise')}>{t('Exercise.1')}</MenuItem>
-                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>Glucose Converter</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={handleonclick}>Log Out</MenuItem>  
               </Menu>
             </>
@@ -278,7 +279,8 @@ export default function Heroku() {
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/diabetes2')}>{t('T2D.1')}</MenuItem>
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/food')}>{t('Food.1')}</MenuItem>
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/exercise')}>{t('Exercise.1')}</MenuItem>
-                  <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                  <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
+                  <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>Glucose Converter</MenuItem>
               </Menu>
               {/* <IconButton
                   size="large"

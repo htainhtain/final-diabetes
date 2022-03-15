@@ -2,7 +2,7 @@ import "./frontpage.css";
 import "./Main.css"
 import React, { useState, useEffect } from "react";
 import BackgroundSlider from 'react-background-slider'
-import { LanguageApi } from '../App.js';
+// import { LanguageApi } from '../App.js';
 import { useTranslation } from 'react-i18next';
 
 const images = [
@@ -19,7 +19,7 @@ const images = [
 function FrontPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const autoPlayTime = 3000;
-  const Lang = React.useContext(LanguageApi)
+  // const Lang = React.useContext(LanguageApi)
   const { t } = useTranslation();
 
   function nextSlide(slideIndex = currentSlide + 1) {

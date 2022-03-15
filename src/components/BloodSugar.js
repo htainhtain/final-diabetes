@@ -62,26 +62,26 @@ function BloodSugar() {
         fetchblooddata();
     }, [random]);
 
-    let beforebreakfast_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'Before breakfast') { return item.bloodsugar } })
-    let beforebreakfast_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'Before breakfast') { return `${item.date}` }})
+    let beforebreakfast_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'Before breakfast') { return item.bloodsugar }})
+    let beforebreakfast_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'Before breakfast') { return `${item.date}` }})
 
-    let afterbreakfast_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'After breakfast') { return item.bloodsugar }})
-    let afterbreakfast_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'After breakfast') { return `${item.date}` }})
+    let afterbreakfast_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'After breakfast') { return item.bloodsugar }})
+    let afterbreakfast_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'After breakfast') { return `${item.date}` }})
 
-    let beforelunch_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'Before lunch') { return item.bloodsugar }})
-    let beforelunch_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'Before lunch') { return `${item.date}` }})
+    let beforelunch_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'Before lunch') { return item.bloodsugar }})
+    let beforelunch_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'Before lunch') { return `${item.date}` }})
 
-    let afterlunch_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'After lunch') { return item.bloodsugar }})
-    let afterlunch_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'After lunch') { return `${item.date}` }})
+    let afterlunch_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'After lunch') { return item.bloodsugar }})
+    let afterlunch_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'After lunch') { return `${item.date}` }})
 
-    let beforedinner_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'Before dinner') { return item.bloodsugar }})
-    let beforedinner_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'Before dinner') { return `${item.date}` }})
+    let beforedinner_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'Before dinner') { return item.bloodsugar }})
+    let beforedinner_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'Before dinner') { return `${item.date}` }})
 
-    let afterdinner_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'After dinner') { return item.bloodsugar }})
-    let afterdinner_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'After dinner') { return `${item.date}` }})
+    let afterdinner_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'After dinner') { return item.bloodsugar }})
+    let afterdinner_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'After dinner') { return `${item.date}` }})
 
-    let beforebed_blooddata = bloodsugardata.map((item) => { if (item.mealtype == 'Before bedtime') { return item.bloodsugar }})
-    let beforebed_mealtype = bloodsugardata.map((item) => { if (item.mealtype == 'Before bedtime') { return `${item.date}` }})
+    let beforebed_blooddata = bloodsugardata.map((item) => { if (item.mealtype === 'Before bedtime') { return item.bloodsugar }})
+    let beforebed_mealtype = bloodsugardata.map((item) => { if (item.mealtype === 'Before bedtime') { return `${item.date}` }})
 
 
     return (

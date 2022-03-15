@@ -22,7 +22,7 @@ function MyExercise() {
     const { currentUser, backendUrl } = useAuth()
     const [intensity, setIntensity] = useState()
 
-    var today = new Date();
+    // var today = new Date();
     var date = moment().format('YYYY-MM-DD')
 
     const thisweek = getWeekDays(getWeekRange(date)['from']);

@@ -10,13 +10,13 @@ function StressPage() {
                 <div className="container home-block">
                     <div className="home-card">
                         <AliceCarousel disableDotsControls='False'>
-                            <img src='/stress_image/0001.jpg' className="sliderimg" alt=""/>
-                            <img src='/stress_image/0002.jpg' className="sliderimg" alt=""/>
-                            <img src='/stress_image/0003.jpg' className="sliderimg" alt=""/>
-                            <img src='/stress_image/0004.jpg' className="sliderimg" alt="" />
-                            <img src='/stress_image/0005.jpg' className="sliderimg" alt=""/>
-                            <img src='/stress_image/0006.jpg' className="sliderimg" alt=""/>
-                            <img src='/stress_image/0007.jpg' className="sliderimg" alt=""/>
+                            <img src='/stress_image/0001.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0002.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0003.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0004.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0005.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0006.jpg' className="sliderimg" alt="" loading='lazy'/>
+                            <img src='/stress_image/0007.jpg' className="sliderimg" alt="" loading='lazy'/>
                         </AliceCarousel>
                     </div>
                 </div>

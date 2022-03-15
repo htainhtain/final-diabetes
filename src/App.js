@@ -21,6 +21,7 @@ import Stress from "./components/Stress";
 import MyExercise from "./components/MyExercise";
 import Test from "./components/Test";
 import { AuthProvider } from "./contexts/AuthContext";
+import GlucoseConverter from "./components/GlucoseConverter";
 
 export const AuthApi = React.createContext();
 export const TokenApi = React.createContext();
@@ -85,6 +86,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/food">
           <Food />
+        </Route>
+        <Route exact path="/glucoseconverter">
+          <GlucoseConverter />
         </Route>
         <Route exact path="/register">
           <Register />
