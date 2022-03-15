@@ -238,7 +238,17 @@
     },
     "objectives":{
         "1": "Objectives of the Project"
+    },
+    "glucoseconverter":{
+        "1": "Glucose Converter"
+    },
+    "convert":{
+        "1": "Convert Glucose (mg/dl) to Glucose(mmol/L)"
+    },
+    "mgdl":{
+        "1": "Glucose (mg/dl)"
+    },
+    "mmoll":{
+        "1": "Glucose (mmol/L)"
     }
-
-
 }

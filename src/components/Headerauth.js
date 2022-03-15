@@ -222,7 +222,7 @@ export default function Heroku() {
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/food')}>{t('Food.1')}</MenuItem>
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/exercise')}>{t('Exercise.1')}</MenuItem>
                 <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
-                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>Glucose Converter</MenuItem>
+                <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>{t('glucoseconverter.1')}</MenuItem>
                 <MenuItem style={{color: 'white'}} onClick={handleonclick}>Log Out</MenuItem>  
               </Menu>
             </>
@@ -280,7 +280,7 @@ export default function Heroku() {
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/food')}>{t('Food.1')}</MenuItem>
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/exercise')}>{t('Exercise.1')}</MenuItem>
                   <MenuItem style={{ color: 'white' }} onClick={() => handleMenuClick('/stress')}>{t('StressManagement.1')}</MenuItem>
-                  <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>Glucose Converter</MenuItem>
+                  <MenuItem style={{color: 'white'}} onClick={() => handleMenuClick('/glucoseconverter')}>{t('glucoseconverter.1')}</MenuItem>
               </Menu>
               {/* <IconButton
                   size="large"

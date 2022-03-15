@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import "./Main.css";
 import { TextField } from '@material-ui/core';
 import { InputAdornment } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 function GlucoseConverterPage() {
     const [bloodsugarMgdl, setBloodsugarMgdl] = useState(0)
     const [bloodsugarMmoll, setBloodsugarMmoll] = useState(0)
+    const { t } = useTranslation();
 
     const covertMgdlToMmoll = (bloodsugarMgdl) => {
         setBloodsugarMmoll((bloodsugarMgdl * 0.0555).toFixed(1))
@@ -20,10 +22,10 @@ function GlucoseConverterPage() {
             <div className='background'>
                 <div className='container home-block'>
                     <div className="home-card">
-                        <div className="text-title">Convert Glucose (mg/dl) to Glucose(mmol/L)</div>
+                        <div className="text-title">{t('convert.1')}</div>
                         <form>
                                 <TextField
-                                    label= 'Glucose (mg/dl)' //sugar level ใส่ระดับน้ำตาลในเลือดของคุณ
+                                    label= {t('mgdl.1')} //sugar level ใส่ระดับน้ำตาลในเลือดของคุณ
                                     type="number" 
                                     InputProps={{
                                         endAdornment: (
@@ -38,7 +40,7 @@ function GlucoseConverterPage() {
                                 }}
                                 />
                                 <TextField
-                                    label= 'Glucose (mmol/L)' //sugar level ใส่ระดับน้ำตาลในเลือดของคุณ
+                                    label= {t('mmoll.1')} //sugar level ใส่ระดับน้ำตาลในเลือดของคุณ
                                     type="number" 
                                     InputProps={{
                                         endAdornment: (
